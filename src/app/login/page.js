@@ -1,9 +1,9 @@
-import { Container, Form, Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 
 const Login = () => {
 
     return (
-        <Container className='d-flex justify-content-center align-items-center' style={{ minHeight: '100vh' }}>
+        <div className='d-flex justify-content-center align-items-center' style={{ minHeight: '100vh' }}>
             <Form style={{ width: '60%' }}>
                 <div className='mb-3'>
                     <Form.Label className=''>Please enter your email</Form.Label>
@@ -15,7 +15,7 @@ const Login = () => {
                     </Button>
                 </div>
             </Form>
-        </Container>
+        </div>
     );
 };
 

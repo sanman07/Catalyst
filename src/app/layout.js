@@ -1,5 +1,7 @@
 import { Inter } from "next/font/google";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Navigation from "./components/Navigation";
+import { Container } from "react-bootstrap";
 
 
 
@@ -13,7 +15,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+      <body className={inter.className}>
+        <Navigation />
+        <Container>
+          {children}
+        </Container>
+      </body>
+    </html >
   );
 }
