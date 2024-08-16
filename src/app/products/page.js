@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useState } from 'react';
-import { Carousel, Container } from 'react-bootstrap';
+import { Carousel } from 'react-bootstrap';
+import Image from 'next/image';
 
 // Function to encode special characters in the category name
 const encodeCategory = (category) => {
@@ -22,20 +23,21 @@ const Products = () => {
   }, []);
 
   return (
-    <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
       <Carousel>
         {products.map((product) => (
           <Carousel.Item key={product.id}>
-            <img
-              className="d-block w-100"
+            <Image
               src={product.image}
               alt={product.title}
-              style={{ maxHeight: '500px', objectFit: 'contain' }}
+              width={600}
+              height={400}
+              style={{ objectFit: 'contain' }}
             />
           </Carousel.Item>
         ))}
       </Carousel>
-    </Container>
+    </div>
   );
 };
 
