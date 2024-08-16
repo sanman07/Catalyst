@@ -2,6 +2,9 @@ import { Inter } from "next/font/google";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from "./components/Navigation";
 import { Container } from "react-bootstrap";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./global.css";
 
 
 

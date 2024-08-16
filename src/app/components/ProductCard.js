@@ -1,4 +1,3 @@
-// components/ProductCard.js
 import { Card, Button, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 
