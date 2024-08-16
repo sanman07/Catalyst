@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Carousel } from 'react-bootstrap';
-import Image from 'next/image';
+import ProductCard from '../components/ProductCard';
 
 // Function to encode special characters in the category name
 const encodeCategory = (category) => {
@@ -23,17 +23,12 @@ const Products = () => {
   }, []);
 
   return (
-    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '70vh' }}>
       <Carousel>
         {products.map((product) => (
           <Carousel.Item key={product.id}>
-            <Image
-              src={product.image}
-              alt={product.title}
-              width={600}
-              height={400}
-              style={{ objectFit: 'contain' }}
-            />
+            <ProductCard product={product} />
+
           </Carousel.Item>
         ))}
       </Carousel>
