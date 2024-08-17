@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import QRCode from 'react-qr-code';
 import { Button } from 'react-bootstrap';
-import { auth, sendSignInLinkToEmail } from '../login/cus_firebase'; // Ensure this path is correct
+import { auth, sendSignInLinkToEmail } from './cus_firebase'; // Adjust the path if necessary // Ensure this path is correct
 const QRLogin = () => {
   const [email, setEmail] = useState('');
   const [qrUrl, setQrUrl] = useState('');
@@ -20,13 +20,11 @@ const QRLogin = () => {
   }, []);
 
   const handleManualLogin = async () => {
-    if (!sessionId) return;
-
     const actionCodeSettings = {
       url: `${window.location.origin}/qr-login?sessionId=${sessionId}`,
       handleCodeInApp: true,
     };
-
+  
     try {
       await sendSignInLinkToEmail(auth, email, actionCodeSettings);
       window.localStorage.setItem('emailForSignIn', email);
@@ -37,6 +35,7 @@ const QRLogin = () => {
       setMessage('');
     }
   };
+  
 
   useEffect(() => {
     if (!sessionId) return;
