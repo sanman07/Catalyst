@@ -1,23 +1,27 @@
 'use client';
-
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Button } from 'react-bootstrap';
+import { CartState } from '../../../../context/CartContext';
 
 const ProductDetail = ({ params }) => {
     const { id } = params;
-    const [product, setProduct] = useState(null);
 
-    useEffect(() => {
-        if (id) {
-            fetch(`https://fakestoreapi.com/products/${id}`)
-                .then((res) => res.json())
-                .then((data) => setProduct(data))
-                .catch((error) => console.error('Error fetching product:', error));
-        }
-    }, [id]);
+    const { products, cart, setCart } = CartState();
 
-    if (!product) return <div>Loading...</div>;
+    const product = products.find((product) => product.id === parseInt(id));
+
+    const handleAddToCart = (product) => {
+        setCart((prevCart) =>
+            prevCart.some((item) => item.id === product.id)
+                ? prevCart.filter((item) => item.id !== product.id)
+                : [...prevCart, product]
+        );
+    };
+
+
+    if (!product) {
+        return <div className="container my-5">Loading...</div>;
+    }
 
     return (
         <div className="container my-5">
@@ -26,7 +30,11 @@ const ProductDetail = ({ params }) => {
             <p>{product.description}</p>
             <p>Price: ${product.price}</p>
             <p>Category: {product.category}</p>
-            <Button variant="primary">Add to Cart</Button>
+            {cart.some((item) => item.id === product.id) ? (
+                <Button variant='secondary' onClick={() => handleAddToCart(product)}>Remove from Cart</Button>
+            ) : (
+                <Button variant='primary' onClick={() => handleAddToCart(product)}>Add to Cart</Button>
+            )}
         </div>
     );
 };

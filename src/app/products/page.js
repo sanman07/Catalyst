@@ -17,7 +17,7 @@ const Products = () => {
   const totalPages = 3;
 
   const handleAddToCart = (product) => {
-    setCart((prevCart) => 
+    setCart((prevCart) =>
       prevCart.some((item) => item.id === product.id)
         ? prevCart.filter((item) => item.id !== product.id)
         : [...prevCart, product]
