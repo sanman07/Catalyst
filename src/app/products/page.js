@@ -1,20 +1,17 @@
-"use client"
+'use client';
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Link from 'next/link';
 import ProductCard from '../components/ProductCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-
-
 function RightArrow(props) {
   const { className, style, onClick } = props;
   return (
     <FontAwesomeIcon
-    icon={faChevronRight}
+      icon={faChevronRight}
       className={className}
       style={{ ...style, display: "block", color: "black" }}
       onClick={onClick}
@@ -26,18 +23,13 @@ function LeftArrow(props) {
   const { className, style, onClick } = props;
   return (
     <FontAwesomeIcon
-    icon={faChevronLeft}
+      icon={faChevronLeft}
       className={className}
       style={{ ...style, display: "block", color: "black", fontSize: "50px" }}
       onClick={onClick}
     />
   );
 }
-
-// Function to encode special characters in the category name
-const encodeCategory = (category) => {
-  return encodeURIComponent(category);
-};
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -46,9 +38,16 @@ const Products = () => {
   const totalPages = 3;
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products?limit=9')
+    fetch('https://fakestoreapi.com/products')
       .then((res) => res.json())
-      .then((data) => setProducts(data))
+      .then((data) => {
+        // Filter products to include only clothing items
+        const clothingItems = data.filter(product =>
+          (product.category === "men's clothing" || product.category === "women's clothing") &&
+          !product.title.includes("Fjallraven")
+        );
+        setProducts(clothingItems);
+      })
       .catch((error) => console.error('Error fetching products:', error));
   }, []);
 
@@ -68,7 +67,7 @@ const Products = () => {
         <div className="container">
           <div className="d-flex justify-content-center align-items-center">
             <button onClick={prevPage} className="btn btn-light me-3">
-              <FaChevronLeft />
+              <FontAwesomeIcon icon={faChevronLeft} />
             </button>
             <div className="row row-cols-1 row-cols-md-3 g-4" style={{ maxWidth: '900px' }}>
               {visibleProducts.map((product) => (
@@ -96,7 +95,7 @@ const Products = () => {
               ))}
             </div>
             <button onClick={nextPage} className="btn btn-light ms-3">
-              <FaChevronRight />
+              <FontAwesomeIcon icon={faChevronRight} />
             </button>
           </div>
         </div>
