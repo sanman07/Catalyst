@@ -38,7 +38,7 @@ const Page = () => {
   }
 
   return (
-    <Box sx={{ backgroundColor: '#f4f6f8', display: 'flex', marginTop: '30px', borderRadius: '20%' }}>
+    <Box sx={{ backgroundColor: '#f4f6f8', display: 'flex', marginTop: '30px'}}>
       <Sidebar onMenuClick={handlePageChange} />
       <Box sx={{ flexGrow: 1 }}>
         <TopBar onLogout={handleLogout} />

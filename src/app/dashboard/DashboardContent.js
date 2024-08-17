@@ -42,7 +42,7 @@ const DashboardContent = () => {
       height: '91vh',  
       flexGrow: 1, 
       marginTop: '10px', 
-      borderRadius: '0 0 20px 0',
+      borderRadius: '20px',
       maxWidth: '145vh',
       maxHeight: '70vh',
       marginBottom: '10px',

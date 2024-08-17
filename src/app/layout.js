@@ -19,13 +19,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Context>
-          <Navigation />
-          <Container style={{ backgroundColor: '#f4f6f8' }}>
-            {children}
-          </Container>
-        </Context>
+      <body className={inter.className} style={{backgroundColor:'#f4f6f8'}}>
+        <Navigation />
+        <Container style={{backgroundColor:'#f4f6f8', maxHeight:'100vh'}}>
+          {children}
+        </Container>
       </body>
     </html >
   );
