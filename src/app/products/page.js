@@ -1,8 +1,7 @@
-"use client"
+'use client';
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Link from 'next/link';
 import ProductCard from '../components/ProductCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -42,7 +41,7 @@ const Products = () => {
         <div className="container">
           <div className="d-flex justify-content-center align-items-center">
             <button onClick={prevPage} className="btn btn-light me-3">
-              <FaChevronLeft />
+              <FontAwesomeIcon icon={faChevronLeft} />
             </button>
             <div className="row row-cols-1 row-cols-md-3 g-4" style={{ maxWidth: '900px' }}>
               {visibleProducts.map((product) => (
@@ -76,7 +75,7 @@ const Products = () => {
               ))}
             </div>
             <button onClick={nextPage} className="btn btn-light ms-3">
-              <FaChevronRight />
+              <FontAwesomeIcon icon={faChevronRight} />
             </button>
           </div>
         </div>
