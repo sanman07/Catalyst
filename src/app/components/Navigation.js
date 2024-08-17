@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 
 
 function Navigation() {
-  const { cart } = CartState();
+  const {cart} = CartState();
   const pathname = usePathname();
 
   // Define the routes where the cart link should not be displayed
