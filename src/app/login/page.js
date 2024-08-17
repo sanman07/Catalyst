@@ -1,73 +1,77 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { auth, signInWithEmailLink, isSignInWithEmailLink } from './cus_firebase'; // Ensure correct path
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { Form, Button } from 'react-bootstrap';
+ // Adjust the import path based on your project structure
+import { auth, signInWithEmailAndPassword, onAuthStateChanged } from './cus_firebase';
 
-const EmailLogin = () => {
+const Login = () => {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-  const [isLoginComplete, setIsLoginComplete] = useState(false);
+  const router = useRouter();
 
-  useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const sessionId = searchParams.get('sessionId');
-    const storedEmail = window.localStorage.getItem('emailForSignIn');
-
-    if (isSignInWithEmailLink(auth, window.location.href)) {
-      signInWithEmailLink(auth, storedEmail, window.location.href)
-        .then(() => {
-          window.localStorage.removeItem('emailForSignIn');
-          // Notify the original page about the successful login
-          window.opener?.postMessage({ sessionId, status: 'success' }, '*');
-          setIsLoginComplete(true);
-        })
-        .catch((error) => {
-          setError('Error signing in: ' + error.message);
-        });
-    }
-  }, []);
-
+  const adminEmail = "admin@abc.com"; // Replace with the actual admin email or UID
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const searchParams = new URLSearchParams(window.location.search);
-    const sessionId = searchParams.get('sessionId');
-
-    const actionCodeSettings = {
-      url: `${window.location.origin}/qr-login?sessionId=${sessionId}`, // Redirect to QR login handler
-      handleCodeInApp: true,
-    };
-
     try {
-      await sendSignInLinkToEmail(auth, email, actionCodeSettings);
-      window.localStorage.setItem('emailForSignIn', email);
-      setMessage('A login link has been sent to your email.');
+      await signInWithEmailAndPassword(auth, email, password);
+      setMessage('You have successfully logged in.');
       setError('');
+
+      if (email === adminEmail) {
+        router.push('/dashboard'); // Redirect to dashboard if the admin logs in
+      } else {
+        router.push('/products'); // Redirect non-admin users to products or another page
+      }
     } catch (err) {
-      setError(`Failed to send login link: ${err.message}`);
+      setError(`Failed to login: ${err.message}`);
       setMessage('');
     }
   };
 
+  // Optional: Redirect already logged-in users based on their role
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        if (user.email === adminEmail) {
+          router.push('/dashboard');
+        } else {
+          router.push('/products');
+        }
+      }
+    });
+
+    return() =>unsubscribe();
+  }, [router]);
+
   return (
-    <div><h2>Email Login</h2>
-      {!isLoginComplete ? (
-        <form onSubmit={handleSubmit}><input
+    <div className='d-flex justify-content-center align-items-center'style={{minHeight: '100vh' }}><Form style={{ width: '60%' }} onSubmit={handleSubmit}><div className='mb-3'><Form.Label>Please enter your email</Form.Label><Form.Control
+            size="lg"
             type="email"
-            placeholder="Enter your email"
+            placeholder="yourname@domain.com..."
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <button type="submit">Send Login Link</button></form>
-      ) : (
-        <p>Login complete! You can close this window.</p>
-      )}
-      {message && <p>{message}</p>}
-      {error && <p style={{color: 'red' }}>{error}</p>}
-    </div>
+        </div><div className='mb-3'><Form.Label>Please enter your password</Form.Label><Form.Control
+            size="lg"
+            type="password"
+            placeholder="Enter your password..."
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div><div className="d-flex justify-content-center"><Button variant="primary" className="w-50" type="submit">
+            Submit
+          </Button></div>
+        {message && <p className="text-success text-center mt-3">{message}</p>}
+        {error && <p className="text-danger text-center mt-3">{error}</p>}
+      </Form></div>
   );
 };
 
-export default EmailLogin;
+export default Login;
