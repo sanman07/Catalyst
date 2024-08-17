@@ -38,7 +38,7 @@ const Products = () => {
             </button>
             <div className="row row-cols-1 row-cols-md-3 g-4" style={{ maxWidth: '900px' }}>
               {visibleProducts.map((product) => (
-                <Link key={product.id} href={`/products/${product.id}`} passHref>
+                <Link key={product.id} href={`/products/${product.id}`} passHref className="text-decoration-none text-reset">
                   <div className="col">
                     <div className="card h-100 cursor-pointer">
                       <div className="d-flex justify-content-center align-items-center" style={{ height: '200px' }}>
@@ -50,9 +50,11 @@ const Products = () => {
                           style={{ objectFit: 'contain' }}
                         />
                       </div>
-                      <div className="card-body d-flex flex-column">
-                        <h5 className="card-title flex-grow-1">{product.title}</h5>
-                        <p className="card-text mt-auto">${product.price}</p>
+                      <div className="card-body d-flex flex-column" style={{ height: '150px' }}>
+                        <h5 className="card-title">{product.title}</h5>
+                        <div className="mt-auto">
+                          <p className="card-text mb-0">${product.price}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
