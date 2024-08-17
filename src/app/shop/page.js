@@ -1,7 +1,7 @@
 "use client"
 import {useState, useEffect} from 'react'
 import { Col, Row } from 'react-bootstrap'
-import ProductCard from '../components/ProductCard'
+import ProductCard from '../components/DO_NOT_USE/ProductCard'
 
 function Shop() {
     const [products, setProducts] = useState([]);

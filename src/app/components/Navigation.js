@@ -7,7 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { CartState } from '../../../context/CartContext';
 import { usePathname } from 'next/navigation';
-
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function Navigation() {
   const {cart} = CartState();
@@ -41,8 +41,8 @@ function Navigation() {
           </Nav>
           <Nav>
             {!shouldHideCartLink && (
-              <Link className="nav-link" href="#" onClick={handleShow}>
-                Cart: ({cart.length})
+              <Link className="btn btn-outline-dark" href="#" onClick={handleShow}>
+                <ShoppingCartIcon /> Cart <span className='badge bg-dark text-white ms-1 rounded-pill'>{cart.length}</span>
               </Link>
             )}
           </Nav>
