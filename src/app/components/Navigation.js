@@ -14,6 +14,7 @@ function Navigation() {
           <Nav className="me-auto">
             <Link className="nav-link" href="/login">Login</Link>
             <Link className="nav-link" href="/products">Products</Link>
+            <Link className="nav-link" href="/dashboard">Dashboard</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
