@@ -4,9 +4,18 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { CartState } from '../../../context/CartContext';
+import { usePathname } from 'next/navigation';
+
 
 function Navigation() {
-  const {cart} = CartState();
+  const { cart } = CartState();
+  const pathname = usePathname();
+
+  // Define the routes where the cart link should not be displayed
+  const hiddenRoutes = ['/dashboard'];
+
+  // Check if the current route is in the list of routes to hide the cart link
+  const shouldHideCartLink = hiddenRoutes.includes(pathname);
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -21,8 +30,12 @@ function Navigation() {
             <Link className="nav-link" href="/dashboard">Dashboard</Link>
           </Nav>
           <Nav>
-            <Link className="nav-link" href="/cart">Cart: ({cart.length})</Link>
-            </Nav>
+            {!shouldHideCartLink && (
+              <Link className="nav-link" href="/cart">
+                Cart: ({cart.length})
+              </Link>
+            )}
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
