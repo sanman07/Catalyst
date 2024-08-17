@@ -3,8 +3,11 @@ import Link from 'next/link';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { CartState } from '../../../context/CartContext';
 
 function Navigation() {
+  const {cart} = CartState();
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -17,6 +20,9 @@ function Navigation() {
             <Link className="nav-link" href="/products">Products</Link>
             <Link className="nav-link" href="/dashboard">Dashboard</Link>
           </Nav>
+          <Nav>
+            <Link className="nav-link" href="/cart">Cart: ({cart.length})</Link>
+            </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
