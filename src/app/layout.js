@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Navigation />
-        <Container>
+        <Container style={{backgroundColor:'#f4f6f8'}}>
           {children}
         </Container>
       </body>
