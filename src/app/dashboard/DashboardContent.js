@@ -4,12 +4,11 @@ import TryoutRoom from './TryoutRoom';
 
 const DashboardContent = () => {
   const rooms = [
-    { roomNumber: 1, status: 'Available', items: [] },
-    { roomNumber: 2, status: 'Occupied', items: ['Shirt', 'Pants', 'Shoes'] },
-    { roomNumber: 3, status: 'Available', items: [] },
-    { roomNumber: 4, status: 'Occupied', items: ['Shirt', 'Pants', 'Shoes'] },
-    { roomNumber: 5, status: 'Available', items: [] },
-    // Add more rooms as needed
+    { roomNumber: 1, status: 'Available', items: [], request:null },
+    { roomNumber: 2, status: 'Occupied', items: ['Shirt', 'Pants', 'Shoes'], request:"Request for size M in Shirt" },
+    { roomNumber: 3, status: 'Available', items: [], request:null },
+    { roomNumber: 4, status: 'Occupied', items: ['Shirt', 'Pants', 'Shoes'], request:null },
+    { roomNumber: 5, status: 'Available', items: [], request:null },
   ];
 
   return (
