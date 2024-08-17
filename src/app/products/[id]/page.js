@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { Button } from 'react-bootstrap';
 
 const ProductDetail = ({ params }) => {
     const { id } = params;
@@ -25,6 +26,7 @@ const ProductDetail = ({ params }) => {
             <p>{product.description}</p>
             <p>Price: ${product.price}</p>
             <p>Category: {product.category}</p>
+            <Button variant="primary">Add to Cart</Button>
         </div>
     );
 };
