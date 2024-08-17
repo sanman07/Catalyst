@@ -1,14 +1,18 @@
 import { Card, Button, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const ProductCard = ({ product }) => {
   const sizes = [32, 33, 34, 35, 36];
   const colors = ['#FF5733', '#33FF57', '#3357FF']; // Example colors
 
   return (
-    <Card style={{ width: '20vw' }} className="mb-4">
-      <Card.Img variant="top" src={product.image} alt={product.title} />
-      <Card.Body>
+    <Card className="mb-4 h-100">
+      <div style={{height: "50%"}}>
+      {/* <Image src={product.image} alt={product.title} layout="fill" objectFit="cover" /> */}
+      <Card.Img variant="top" src={product.image} alt={product.title} style={{ width: '100%', height: '100%', objectFit: 'contain' }}/>
+      </div>
+      <Card.Body className='d-flex flex-column'>
         <Card.Title>{product.title.substring(0, 20) + "..."}</Card.Title>
         <Card.Text>
           <strong>Price:</strong> ${product.price}
@@ -32,7 +36,7 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* Colors */}
-        <div className="mb-3">
+        <div>
           <strong>Colors:</strong>
           <div className="mt-2">
             {colors.map((color, index) => (
@@ -51,6 +55,7 @@ const ProductCard = ({ product }) => {
             ))}
           </div>
         </div>
+        <div className="flex-grow-1"></div>
 
         {/* Buttons */}
         <div className="d-flex justify-content-between">

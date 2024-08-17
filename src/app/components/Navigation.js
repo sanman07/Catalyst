@@ -13,6 +13,7 @@ function Navigation() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Link className="nav-link" href="/login">Login</Link>
+            <Link className="nav-link" href="/shop">Shop</Link>
             <Link className="nav-link" href="/products">Products</Link>
             <Link className="nav-link" href="/dashboard">Dashboard</Link>
           </Nav>
