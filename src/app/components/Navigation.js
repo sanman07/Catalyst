@@ -25,6 +25,8 @@ function Navigation() {
     // Toggle function for off-canvas
     const handleShow = () => setShowOffcanvas(true);
     const handleClose = () => setShowOffcanvas(false);
+    const totalPrice = cart.reduce((total, item) => total + item.price, 0).toFixed(2);
+
 
   return (
     <>
@@ -57,16 +59,21 @@ function Navigation() {
           {cart.length === 0 ? (
             <p>Your cart is empty.</p>
           ) : (
-            <ul className="list-group">
-              {cart.map((item) => (
-                <li key={item.id} className="list-group-item">
-                  <div className="d-flex justify-content-between">
-                    <span>{item.title}</span>
-                    <span>${item.price.toFixed(2)}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <>
+              <ul className="list-group flex-grow-1">
+                {cart.map((item) => (
+                  <li key={item.id} className="list-group-item">
+                    <div className="d-flex justify-content-between">
+                      <span>{item.title}</span>
+                      <span>${item.price.toFixed(2)}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-3 text-end">
+                <strong>Total: ${totalPrice}</strong>
+              </div>
+            </>
           )}
         </Offcanvas.Body>
       </Offcanvas>
