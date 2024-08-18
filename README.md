@@ -51,15 +51,16 @@ You can log in to the application using the following credentials:
 
 Email:test@abc.com
 Password:test123
-Using the Product Page
+
+#### Using the Product Page
 
 The product page displays a list of products fetched from the Flask backend. You can browse through the available products, which are filtered to show only relevant categories.
 
-Using the Dashboard
+#### Using the Dashboard
 
 The dashboard allows you to manage trial room requests:
 
-Room Status: Each room shows its current status (e.g., Available, Occupied).
-Room Requests: If a room has a request (e.g., a different size), it will display in the room card.
-Clear Request: You can clear a request by clicking the "Clear Request" button, which will remove the request from the room and update the backend.
+*Room Status*: Each room shows its current status (e.g., Available, Occupied).
+*Room Requests*: If a room has a request (e.g., a different size), it will display in the room card.
+*Clear Request*: You can clear a request by clicking the "Clear Request" button, which will remove the request from the room and update the backend.
 The dashboard automatically updates with new data from the backend every few seconds.
