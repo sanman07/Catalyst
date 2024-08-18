@@ -20,7 +20,24 @@ const TryoutRoom = ({ roomNumber, status, items, request }) => {
   const handleClickOpen = () => {
     setOpen(true);
   };
+  const handleClearRequest = async () => {
+    try {
+      const response = awaitfetch(`http://127.0.0.1:5000/clear-request/${roomNumber}`, {
+        method: 'DELETE',
+      });
 
+      if (response.ok) {
+        alert(`Request cleared for Room ${roomNumber}`);
+        setBounce(false); // Stop bouncing animation after 
+        clearinghandleClose(); // Close the dialog
+      } else {
+        alert('Failed to clear the request.');
+      }
+    } catch (error) {
+      console.error('Error clearing request:', error);
+      alert('Error clearing the request.');
+    }
+  };
   const handleClose = () => {
     setOpen(false);
   };

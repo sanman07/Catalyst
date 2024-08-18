@@ -36,10 +36,36 @@ const ProductDetail = ({ params }) => {
 
     const handleRequestConfirmation = (confirm) => {
         setShowModal(false);
+        
         if (confirm) {
-            alert(`Request for size ${selectedSize} sent to the store!`);
+            // Assuming `selectedSize` and `stallNo` are available in your component state
+            const requestData = {
+                stallNo: 2, // Replace with the actual stall number, or use state if dynamic
+                request: selectedSize
+            };
+    
+            fetch('http://127.0.0.1:5000/request-item', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(`Request for size ${selectedSize} sent to the store!`);
+                } else {
+                    alert('Failed to send request. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error sending request.');
+            });
         }
     };
+    
 
     if (!product) {
         return <div className="container my-5">Loading...</div>;
