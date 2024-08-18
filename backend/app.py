@@ -9,7 +9,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Initialize Firebase Admin SDK
-cred = credentials.ApplicationDefault()
+cred = credentials.Certificate("./catalyst-d11fa-firebase-adminsdk-sj1pm-b6f161a95a.json")
 firebase_admin.initialize_app(cred)
 
 # Get Firestore database reference
