@@ -12,9 +12,9 @@ const Sidebar = ({ onMenuClick }) => {
   };
 
   return (
-    <Box sx={{ width: '250px', backgroundColor: 'white', maxHeight: '85vh', padding: '20px', borderRadius:'20px 0 0 20px', margin:'10px'}}>
-      <h3>Store Admin</h3>
-      <List style={{ paddingTop: '30px' }}>
+    <Box sx={{ width: '250px', backgroundColor: 'white', maxHeight: '85vh', borderRadius:'20px 0 0 20px', margin:'10px'}}>
+      <h3 style={{padding: '20px', textAlign:'center', marginTop:'20px'}}>Store Admin</h3>
+      <List style={{ paddingRight: '20px' }}>
         <ListItem
           button
           sx={{
@@ -23,10 +23,11 @@ const Sidebar = ({ onMenuClick }) => {
             paddingTop: '15px',
             paddingBottom: '15px',
             backgroundColor: selectedMenu === 'dashboard' ? '#e0f7fa' : 'transparent',
+            boxShadow: selectedMenu === 'dashboard' ? '2px 1px 2px rgba(0, 0, 0, 0.2)' : '0',
             '&:hover': {
               backgroundColor: '#e0f7fa',
             },
-            borderRadius: '10px',
+            borderRadius: '0 15px 15px 0',
           }}
           onClick={() => handleMenuClick('dashboard')}
         >
@@ -43,10 +44,11 @@ const Sidebar = ({ onMenuClick }) => {
             paddingTop: '15px',
             paddingBottom: '15px',
             backgroundColor: selectedMenu === 'inventory' ? '#e0f7fa' : 'transparent',
+            boxShadow: selectedMenu === 'inventory' ? '2px 1px 2px rgba(0, 0, 0, 0.2)' : '0',
             '&:hover': {
               backgroundColor: '#e0f7fa',
             },
-            borderRadius: '10px',
+            borderRadius: '0 15px 15px 0',
           }}
           onClick={() => handleMenuClick('inventory')}
         >
@@ -63,10 +65,11 @@ const Sidebar = ({ onMenuClick }) => {
             paddingTop: '15px',
             paddingBottom: '15px',
             backgroundColor: selectedMenu === 'feedback' ? '#e0f7fa' : 'transparent',
+            boxShadow: selectedMenu === 'feedback' ? '2px 1px 2px rgba(0, 0, 0, 0.2)' : '0',
             '&:hover': {
               backgroundColor: '#e0f7fa',
             },
-            borderRadius: '10px',
+            borderRadius: '0 15px 15px 0',
           }}
           onClick={() => handleMenuClick('feedback')}
         >

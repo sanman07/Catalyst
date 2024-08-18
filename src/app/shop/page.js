@@ -9,9 +9,19 @@ function Shop() {
     useEffect(() => {
       fetch('https://fakestoreapi.com/products?limit=9')
         .then((res) => res.json())
-        .then((data) => setProducts(data))
+        .then((data) => {
+          console.log("Fetched data:", data);
+          // Filter products to include only clothing items
+          const clothingItems = data.filter(product =>
+            (product.category.toLowerCase() === "men's clothing" || product.category.toLowerCase() === "women's clothing") && 
+              !product.title.toLowerCase().includes("fjallraven")
+            );
+          console.log("Filtered clothing items:", clothingItems);
+          setProducts(clothingItems);
+        })
         .catch((error) => console.error('Error fetching products:', error));
     }, []);
+    
 
 
   return (
