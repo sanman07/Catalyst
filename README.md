@@ -24,15 +24,12 @@ pip install -r requirements.txt
 4. Configure Environment Variables
 Create a .env file in the backend directory with the following content:
 
-plaintext
-Copy code
+
 FIREBASE_CREDENTIALS_PATH=/path/to/your/serviceAccountKey.json
 Make sure the path points to your Firebase service account key JSON file.
 
 5. Run the Flask Server
-bash
-Copy code
-flask run
+
 The Flask server should now be running on http://127.0.0.1:5000.
 
 Flask API Endpoints
@@ -54,8 +51,6 @@ yarn install
 3. Configure Environment Variables
 Create a .env.local file in the frontend directory with your Firebase configuration:
 
-plaintext
-Copy code
 NEXT_PUBLIC_FIREBASE_API_KEY=your-api-key
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-auth-domain
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
