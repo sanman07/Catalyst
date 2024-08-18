@@ -1,74 +1,72 @@
-"use client";
+'use client';
 
-export default function Home() {
-  const handleLoginClick = () => {
-    window.location.href = '/login';
-  };
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Button, Container, Row, Col, Card } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart, faTags, faTruck } from '@fortawesome/free-solid-svg-icons';
+import dynamic from 'next/dynamic';
 
+const DynamicFeaturedProducts = dynamic(() => import('./components/FeaturedProducts'), { ssr: false });
+
+const Home = () => {
   return (
-    <main style={styles.container}>
-      <h1 style={styles.heading}>
-        The revolutionized way of in-store shopping experience.
-      </h1>
-      <h2 style={styles.subheading}>
-        Let's Get Started
-      </h2>
-      <button onClick={handleLoginClick} style={styles.button}>
-        Go to Login
-      </button>
-    </main>
-  );
-}
+    <div className="d-flex flex-column" style={{ minHeight: 'calc(100vh - 60px)' }}>
+      {/* Hero Section */}
+      <div className="py-5" style={{ backgroundColor: 'transparent' }}>
+        <Container>
+          <Row className="justify-content-center">
+            <Col md={8} className="text-center">
+              <h1 className="display-4" style={{ color: 'black' }}>Welcome to SimplyShop</h1>
+              <p className="lead" style={{ color: 'black' }}>Discover amazing products at unbeatable prices!</p>
+              <Link href="/login" passHref>
+                <Button variant="outline-dark" size="lg">Login</Button>
+              </Link>
+            </Col>
+          </Row>
+        </Container>
+      </div>
 
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100vh',
-    textAlign: 'center',
-    backgroundColor: '#F3F4F6', // Light background color
-    padding: '20px',
-    maxWidth: '100%',
-    backgroundImage: 'url(/path-to-your-background-image.png)', // Replace with your actual image path
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    position: 'relative',
-  },
-  heading: {
-    fontSize: '3rem',
-    color: '#4A4A4A',
-    marginBottom: '20px',
-    fontWeight: '700',
-    fontFamily: '"Poppins", sans-serif',
-    textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-    zIndex: 2, // Ensure text is above any background effects
-  },
-  subheading: {
-    fontSize: '1.8rem',
-    color: '#6D6D6D',
-    marginBottom: '40px',
-    fontWeight: '300',
-    marginTop: '2%',
-    fontFamily: '"Poppins", sans-serif',
-    zIndex: 2, // Ensure text is above any background effects
-  },
-  button: {
-    backgroundColor: '#FF6B6B',
-    color: '#fff',
-    padding: '15px 30px',
-    fontSize: '1.2rem',
-    fontWeight: '600',
-    borderRadius: '30px', // Rounded button for a softer look
-    border: 'none',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s ease, transform 0.3s ease',
-    zIndex: 2, // Ensure button is above any background effects
-    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)', // Soft shadow for depth
-  },
-  buttonHover: {
-    backgroundColor: '#FF5252',
-    transform: 'scale(1.05)', // Slightly larger on hover
-  },
+      {/* Featured Products Section */}
+      <Container className="my-5">
+        <h2 className="text-center mb-4">Featured Products</h2>
+        <DynamicFeaturedProducts />
+      </Container>
+
+      {/* Features Section */}
+      <div className="bg-light py-5">
+        <Container>
+          <Row className="text-center">
+            <Col md={4} className="mb-4">
+              <FontAwesomeIcon icon={faShoppingCart} size="3x" className="text-primary mb-3" />
+              <h4>Easy Shopping</h4>
+              <p>Browse and purchase with just a few clicks</p>
+            </Col>
+            <Col md={4} className="mb-4">
+              <FontAwesomeIcon icon={faTags} size="3x" className="text-primary mb-3" />
+              <h4>Great Deals</h4>
+              <p>Enjoy competitive prices and regular discounts</p>
+            </Col>
+            <Col md={4} className="mb-4">
+              <FontAwesomeIcon icon={faTruck} size="3x" className="text-primary mb-3" />
+              <h4>Fast Delivery</h4>
+              <p>Quick and reliable shipping to your doorstep</p>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+
+      {/* Call to Action Section */}
+      <Container className="my-5 text-center">
+        <h2>Ready to start shopping?</h2>
+        <p className="lead mb-4">Login to your account to explore our wide range of products.</p>
+        <Link href="/login" passHref>
+          <Button variant="primary" size="lg">Login</Button>
+        </Link>
+      </Container>
+    </div>
+  );
 };
+
+export default Home;
