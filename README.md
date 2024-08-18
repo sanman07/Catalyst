@@ -1,5 +1,8 @@
 This project consists of a Flask backend and a Next.js frontend that work together to manage products and handle trial room requests. The application includes user authentication, a product page, and a dashboard for managing trial room requests.
 
+## Live Preview
+[https://catalyst3.vercel.app/](https://catalyst3.vercel.app/)
+
 ## Prerequisites
 
 Before running the application, ensure that you have the following installed:
