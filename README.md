@@ -20,10 +20,11 @@ python -m venv venv
 source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 ### 3. Run the Flask Server
 
+cd /backend
+python3 app.py
 The Flask server should now be running on http://127.0.0.1:5000.
 
-cd /backend
-pytnon app.py
+
 
 Flask API Endpoints
 GET /get-products: Fetches the list of products from Firestore.
