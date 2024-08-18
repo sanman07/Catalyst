@@ -9,28 +9,21 @@ Before running the application, ensure that you have the following installed:
 - npm or Yarn
 - Firebase account with Firestore and Firebase Authentication enabled
 
-## Backend (Flask)### 1. Clone the Repository```bash
+## Backend (Flask)
+### 1. Clone the Repository
 git clone https://github.com/your-username/your-repo.git
 cd your-repo/backend
-2. Set Up Virtual Environment
+### 2. Set Up Virtual Environment
 bash
 Copy code
 python -m venv venv
 source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-3. Install Dependencies
-bash
-Copy code
-pip install -r requirements.txt
-4. Configure Environment Variables
-Create a .env file in the backend directory with the following content:
-
-
-FIREBASE_CREDENTIALS_PATH=/path/to/your/serviceAccountKey.json
-Make sure the path points to your Firebase service account key JSON file.
-
-5. Run the Flask Server
+### 3. Run the Flask Server
 
 The Flask server should now be running on http://127.0.0.1:5000.
+
+cd /backend
+pytnon app.py
 
 Flask API Endpoints
 GET /get-products: Fetches the list of products from Firestore.
@@ -38,10 +31,8 @@ GET /get-trial-requests: Retrieves all trial requests.
 DELETE /clear-request/<stall_no>: Clears the request for the specified stall number.
 Frontend (Next.js)
 
-1. Navigate to the Frontend Directory
-bash
-Copy code
-cd ../frontend
+
+
 2. Install Dependencies
 bash
 Copy code
