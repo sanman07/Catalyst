@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, TextField, Button, Select, MenuItem, InputLabel, FormControl, Grid, IconButton } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -43,13 +45,13 @@ const Inventory = () => {
   }, [inventoryData, searchQuery, category, sort]);
 
   return (
-    <Box 
-      sx={{ 
-        padding: '20px', 
-        height: '91vh', 
-        flexGrow: 1, 
-        marginTop: '10px', 
-        borderRadius: '20px', 
+    <Box
+      sx={{
+        padding: '20px',
+        height: '91vh',
+        flexGrow: 1,
+        marginTop: '10px',
+        borderRadius: '20px',
         backgroundColor: 'white',
         maxHeight: '70vh',
         marginBottom: '10px',
@@ -60,16 +62,16 @@ const Inventory = () => {
 
       {/* Search Bar */}
       <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <TextField 
-          fullWidth 
-          variant="outlined" 
+        <TextField
+          fullWidth
+          variant="outlined"
           placeholder="Search for items"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           sx={{ marginRight: '10px' }}
         />
-        <Button 
-          variant="contained" 
+        <Button
+          variant="contained"
           sx={{ padding: '10px 20px', backgroundColor: '#6200ea', color: 'white' }}
         >
           Search
@@ -81,7 +83,7 @@ const Inventory = () => {
         <Grid item xs={4}>
           <FormControl fullWidth variant="outlined">
             <InputLabel>Category</InputLabel>
-            <Select 
+            <Select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               label="Category"
@@ -97,7 +99,7 @@ const Inventory = () => {
         <Grid item xs={4}>
           <FormControl fullWidth variant="outlined">
             <InputLabel>Sort By</InputLabel>
-            <Select 
+            <Select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
               label="Sort By"
@@ -112,39 +114,39 @@ const Inventory = () => {
       </Grid>
 
       {/* Inventory List */}
-      <Box 
-        sx={{ 
-          borderRadius: '10px', 
-          border: '1px solid #e0e0e0', 
+      <Box
+        sx={{
+          borderRadius: '10px',
+          border: '1px solid #e0e0e0',
           padding: '15px',
           height: 'calc(100% - 240px)', // Adjust height based on other content
           overflowY: 'auto', // Enable scrolling for this section only
         }}
       >
         <Typography variant="h6" sx={{ marginBottom: '10px', fontWeight: '500' }}>Items</Typography>
-        
+
         {/* Render inventory items dynamically */}
         {filteredData.map((item) => (
-          <Box 
-            key={item.id} 
-            sx={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              padding: '10px 0', 
+          <Box
+            key={item.id}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              padding: '10px 0',
               borderBottom: '1px solid #e0e0e0',
               '&:last-child': { borderBottom: 'none' }
             }}
           >
-            <Box 
-              sx={{ 
-                width: '60px', 
-                height: '60px', 
-                backgroundImage: `url(${item.image})`, 
-                backgroundSize: 'cover', 
-                backgroundPosition: 'center', 
-                borderRadius: '8px', 
-                marginRight: '15px' 
-              }} 
+            <Box
+              sx={{
+                width: '60px',
+                height: '60px',
+                backgroundImage: `url(${item.image})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                borderRadius: '8px',
+                marginRight: '15px'
+              }}
             />
             <Box sx={{ flexGrow: 1 }}>
               <Typography variant="body1">{item.title}</Typography>
