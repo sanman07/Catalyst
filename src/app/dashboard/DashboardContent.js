@@ -12,7 +12,7 @@ const DashboardContent = () => {
   ]);
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products?limit=5')
+    fetch('http://127.0.0.1:5000/get-products')
       .then((res) => res.json())
       .then((data) => {
         // Filter products to include only clothing items
