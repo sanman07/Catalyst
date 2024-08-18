@@ -12,75 +12,59 @@ const DashboardContent = () => {
   ]);
 
   useEffect(() => {
-    const fetchProductsAndRequests = async () => {
-      try {
-        // Fetch products
-        const productRes = await fetch('http://127.0.0.1:5000/get-products');
-        const productsData = await productRes.json();
-
-        // Fetch trial requests
-        const requestRes = await fetch('http://127.0.0.1:5000/get-trial-requests');
-        const requestsData = await requestRes.json();
-
+    fetch('http://127.0.0.1:5000/get-products')
+      .then((res) => res.json())
+      .then((data) => {
         // Filter products to include only clothing items
-        const clothingItems = productsData.filter(product =>
+        const clothingItems = data.filter(product =>
           (product.category === "men's clothing" || product.category === "women's clothing") && 
           !product.title.includes("Fjallraven")
         );
 
-        // Update the rooms with the filtered clothing items and append requests
+        // Update the rooms with the clothing items
         const updatedRooms = rooms.map(room => {
           if (room.roomNumber === 2 || room.roomNumber === 4) {
-            const roomItems = clothingItems
-              .filter(item => item.stallNo === room.roomNumber)
-              .map(item => item.title);
-
-            const roomRequests = requestsData
-              .filter(request => request.stallNo === room.roomNumber)
-              .map(request => request.request);
-
-            return {
-              ...room,
-              items: roomItems,
-              request: roomRequests.length > 0 ? roomRequests.join(', ') : room.request,
-            };
+            const roomItems = clothingItems.map(item => item.title);
+            return { ...room, items: roomItems };
           }
           return room;
         });
 
         setRooms(updatedRooms);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+      })
+      .catch((error) => console.error('Error fetching products:', error));
+  }, [rooms]);
 
-    // Initial fetch
-    fetchProductsAndRequests();
-
-    // Polling every 5 seconds to check for updates
-    const interval = setInterval(fetchProductsAndRequests, 5000);
-
-    // Cleanup interval on unmount
-    return() =>clearInterval(interval);
-  }, []);
-
+  const handleClearRequest = (roomNumber) => {
+    setRooms(rooms.map(room =>
+      room.roomNumber === roomNumber
+        ? { ...room, request: null }
+        : room
+    ));
+  };
 
   return (
-    <Box sx={{backgroundColor: 'white', 
+    <Box sx={{ 
+      backgroundColor: 'white', 
       padding: '20px', 
       height: '91vh',  
-      flexGrow:1, 
+      flexGrow: 1, 
       marginTop: '10px', 
       borderRadius: '20px',
       maxWidth: '145vh',
       maxHeight: '70vh',
       marginBottom: '10px',
-      boxShadow: '02px10pxrgba(0, 0, 0, 0.1)',
-    }}><Typography variant="h5" sx={{ marginBottom: '20px' }}>Manage Tryout Rooms</Typography><Grid container spacing={3}>
+      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+    }}>
+      <Typography variant="h5" sx={{ marginBottom: '20px' }}>Manage Tryout Rooms</Typography>
+      <Grid container spacing={3}>
         {rooms.map(room => (
-          <Grid itemxs={4}key={room.roomNumber}><TryoutRoom {...room} /></Grid>
+          <Grid item xs={4} key={room.roomNumber}>
+            <TryoutRoom {...room} onClearRequest={handleClearRequest} />
+          </Grid>
         ))}
-      </Grid></Box>
+      </Grid>
+    </Box>
   );
 };
 

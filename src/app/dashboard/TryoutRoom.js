@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Card, Typography, Dialog, DialogTitle, DialogContent } from '@mui/material';
+import { Box, Card, Typography, Dialog, DialogTitle, DialogContent, Button, DialogActions } from '@mui/material';
 import { keyframes } from '@emotion/react';
 
 const bounceAnimation = keyframes`
@@ -7,7 +7,7 @@ const bounceAnimation = keyframes`
   50% { transform: translateY(-5px); } // Reduced bounce for a subtle effect
 `;
 
-const TryoutRoom = ({ roomNumber, status, items, request }) => {
+const TryoutRoom = ({ roomNumber, status, items, request, onClearRequest }) => {
   const [open, setOpen] = useState(false);
   const [bounce, setBounce] = useState(false);
 
@@ -20,25 +20,14 @@ const TryoutRoom = ({ roomNumber, status, items, request }) => {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleClearRequest = async () => {
-    try {
-      const response = awaitfetch(`http://127.0.0.1:5000/clear-request/${roomNumber}`, {
-        method: 'DELETE',
-      });
 
-      if (response.ok) {
-        alert(`Request cleared for Room ${roomNumber}`);
-        setBounce(false); // Stop bouncing animation after 
-        clearinghandleClose(); // Close the dialog
-      } else {
-        alert('Failed to clear the request.');
-      }
-    } catch (error) {
-      console.error('Error clearing request:', error);
-      alert('Error clearing the request.');
-    }
-  };
   const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleClearRequest = () => {
+    onClearRequest(roomNumber);
+    setBounce(false);
     setOpen(false);
   };
 
@@ -101,6 +90,22 @@ const TryoutRoom = ({ roomNumber, status, items, request }) => {
             </>
           )}
         </DialogContent>
+        <DialogActions sx={{ justifyContent: 'center' }}>
+        {request && (
+          <Button
+            variant="contained"
+            sx={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              textAlign: 'center',
+            }}
+            onClick={handleClearRequest}
+          >
+            Clear Request
+          </Button>
+        )}
+      </DialogActions>
+
       </Dialog>
     </div>
   );
