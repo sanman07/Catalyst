@@ -10,7 +10,7 @@ import Feedback from './feedback/page.js';
 
 const Page = () => {
   const [authenticated, setAuthenticated] = useState(false);
-  const [currentPage, setCurrentPage] = useState('dashboard'); 
+  const [currentPage, setCurrentPage] = useState('dashboard');
 
   const handleLogin = (code) => {
     const correctCode = '1111';
@@ -20,9 +20,9 @@ const Page = () => {
       alert('Incorrect code. Please try again.');
     }
   };
-  
+
   const handleLogout = () => {
-    setAuthenticated(false); 
+    setAuthenticated(false);
   };
 
   const handlePageChange = (page) => {
@@ -38,13 +38,13 @@ const Page = () => {
   }
 
   return (
-    <Box sx={{ backgroundColor: '#f4f6f8', display: 'flex', marginTop: '30px'}}>
+    <Box sx={{ backgroundColor: '#f4f6f8', display: 'flex', marginTop: '30px' }}>
       <Sidebar onMenuClick={handlePageChange} />
       <Box sx={{ flexGrow: 1 }}>
         <TopBar onLogout={handleLogout} />
         {currentPage === 'dashboard' && <Dashboard />}
         {currentPage === 'inventory' && <Inventory />}
-        {currentPage === 'feedback' && <Feedback/>}
+        {currentPage === 'feedback' && <Feedback />}
       </Box>
     </Box>
   );

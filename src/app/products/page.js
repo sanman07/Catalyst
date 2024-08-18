@@ -36,6 +36,10 @@ const Products = () => {
 
   return (
     <div className="d-flex flex-column" style={{ height: 'calc(100vh - 60px)' }}>
+      
+      <h2 style={styles.subheading}>
+        Select the product to request service
+      </h2>
       <div className="flex-grow-1 d-flex justify-content-center align-items-center">
         <div className="container">
           <div className="d-flex justify-content-center align-items-center">
@@ -84,6 +88,20 @@ const Products = () => {
       </div>
     </div>
   );
+};
+
+const styles = {
+  subheading: {
+    fontSize: '1.8rem',
+    color: '#6D6D6D',
+    marginBottom: '40px',
+    fontWeight: '300',
+    marginTop: '2%',
+    fontFamily: '"Poppins", sans-serif',
+    textAlign: 'center',  // Centers the text
+    zIndex: 2,
+    marginTop:'5%'  // Ensure text is above any background effects
+  },
 };
 
 export default Products;

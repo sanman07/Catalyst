@@ -61,7 +61,7 @@ const TryoutRoom = ({ roomNumber, status, items, request, onClearRequest }) => {
         {items && items.length > 0 ? (
           <Typography variant="body2" sx={{ marginTop: '10px' }}>Items: {items.length}</Typography>
         ) : (
-          <Typography variant="body2" sx={{ marginTop: '10px' }}>Available</Typography>
+          <Typography variant="body2" sx={{ marginTop: '10px' }}> </Typography>
         )}
       </Card>
 
