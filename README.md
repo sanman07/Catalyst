@@ -37,9 +37,7 @@ Frontend (Next.js)
 2. Install Dependencies
 bash
 Copy code
-npm install
-# or
-yarn install
+npm install or yarn install
 3. Configure Environment Variables
 Create a .env.local file in the frontend directory with your Firebase configuration:
 
@@ -53,8 +51,6 @@ NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
 bash
 Copy code
 npm run dev
-# or
-yarn dev
 The Next.js app should now be running on http://localhost:3000.
 
 Authentication
