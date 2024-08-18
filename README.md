@@ -35,13 +35,11 @@ Frontend (Next.js)
 
 
 ### 4. Install Dependencies
-bash
-Copy code
+
 npm install or yarn install
 
 ### 5. Run the Next.js Development Server
-bash
-Copy code
+
 npm run dev
 The Next.js app should now be running on http://localhost:3000.
 
