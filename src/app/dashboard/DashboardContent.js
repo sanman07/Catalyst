@@ -5,9 +5,9 @@ import TryoutRoom from './TryoutRoom';
 const DashboardContent = () => {
   const [rooms, setRooms] = useState([
     { roomNumber: 1, status: 'Available', items: [], request: null },
-    { roomNumber: 2, status: 'Occupied', items: [], request: null },
+    { roomNumber: 2, status: 'Occupied', items: ['Adidas Hoodie','Nike Sweatshirt'], request: null },
     { roomNumber: 3, status: 'Available', items: [], request: null },
-    { roomNumber: 4, status: 'Occupied', items: [], request: null },
+    { roomNumber: 4, status: 'Occupied', items: ['Adidas Hoodie','Nike Sweatshirt'], request: null },
     { roomNumber: 5, status: 'Available', items: [], request: null },
   ]);
 
