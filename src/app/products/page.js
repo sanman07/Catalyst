@@ -1,22 +1,28 @@
-"use client"
+'use client';
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Link from 'next/link';
+import ProductCard from '../components/DO_NOT_USE/ProductCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { CartState } from '../../../context/CartContext';
+import { Button } from 'react-bootstrap';
+
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const { cart, setCart, products } = CartState()
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 3;
   const totalPages = 3;
 
-  useEffect(() => {
-    fetch('https://fakestoreapi.com/products?limit=9')
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.error('Error fetching products:', error));
-  }, []);
+  const handleAddToCart = (product) => {
+    setCart((prevCart) =>
+      prevCart.some((item) => item.id === product.id)
+        ? prevCart.filter((item) => item.id !== product.id)
+        : [...prevCart, product]
+    );
+  };
 
   const nextPage = () => {
     setCurrentPage((prevPage) => (prevPage + 1) % totalPages);
@@ -34,14 +40,14 @@ const Products = () => {
         <div className="container">
           <div className="d-flex justify-content-center align-items-center">
             <button onClick={prevPage} className="btn btn-light me-3">
-              <FaChevronLeft />
+              <FontAwesomeIcon icon={faChevronLeft} />
             </button>
             <div className="row row-cols-1 row-cols-md-3 g-4" style={{ maxWidth: '900px' }}>
               {visibleProducts.map((product) => (
-                <Link key={product.id} href={`/products/${product.id}`} passHref className="text-decoration-none text-reset">
-                  <div className="col">
-                    <div className="card h-100 cursor-pointer">
-                      <div className="d-flex justify-content-center align-items-center" style={{ height: '200px' }}>
+                <div key={product.id} className="col">
+                  <div className="card h-100 cursor-pointer">
+                    <div className="d-flex justify-content-center align-items-center" style={{ height: '200px' }}>
+                      <Link key={product.id} href={`/products/${product.id}`} passHref className="text-decoration-none text-reset">
                         <Image
                           src={product.image}
                           alt={product.title}
@@ -49,20 +55,26 @@ const Products = () => {
                           height={150}
                           style={{ objectFit: 'contain' }}
                         />
-                      </div>
-                      <div className="card-body d-flex flex-column" style={{ height: '150px' }}>
-                        <h5 className="card-title">{product.title}</h5>
-                        <div className="mt-auto">
-                          <p className="card-text mb-0">${product.price}</p>
-                        </div>
+                      </Link>
+                    </div>
+                    <div className="card-body d-flex flex-column" style={{ height: '150px' }}>
+                      <h5 className="card-title">{product.title}</h5>
+                      <div className="mt-auto">
+                        <p className="card-text mb-0">${product.price}</p>
                       </div>
                     </div>
+                    {cart.some((item) => item.id === product.id) ? (
+                      <Button variant='secondary' onClick={() => handleAddToCart(product)}>Remove from Cart</Button>
+                    ) : (
+                      <Button variant='primary' onClick={() => handleAddToCart(product)}>Add to Cart</Button>
+                    )}
+
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
             <button onClick={nextPage} className="btn btn-light ms-3">
-              <FaChevronRight />
+              <FontAwesomeIcon icon={faChevronRight} />
             </button>
           </div>
         </div>
