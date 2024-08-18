@@ -47,7 +47,7 @@ function Navigation() {
                 <ShoppingCartIcon /> Cart <span className='badge bg-dark text-white ms-1 rounded-pill'>{cart.length}</span>
               </Link>
             )}
-          </Nav>
+          </Nav>  
         </Navbar.Collapse>
       </Container>
     </Navbar>
